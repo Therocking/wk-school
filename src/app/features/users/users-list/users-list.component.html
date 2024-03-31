@@ -1,0 +1,36 @@
+<div class="w-50 mb-5 input-group flex-nowrap">
+  <span class="input-group-text" id="addon-wrapping">👤</span>
+  <input 
+    [(ngModel)]="fullName" 
+    (input)="filterUsers()"
+    value="fullName" 
+    type="text" 
+    class="form-control" 
+    placeholder="Filter users"
+    aria-label="Username" aria-describedby="addon-wrapping">
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">FullName</th>
+      <th scope="col">Username</th>
+      <th scope="col">Status</th>
+      <!-- <th scope="col">Role</th> -->
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.fullName}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.isActive ? "Active" : "Inactive"}}</td>
+      <td class="">
+        <button *ngIf="isAdmin()" (click)="deleteUser(user.id)" class="btn btn-outline-danger">Delete</button>
+        <a [routerLink]="['../edit', user.id]" class="btn btn-info mx-4">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

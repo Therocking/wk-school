@@ -1,0 +1,31 @@
+<button *ngIf="currentUser.id" class="btn btn-outline-secondary mb-5" (click)="goBack()">Go back</button>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="w-75">
+  <div class="mb-3">
+    <label for="fullname" class="form-label">FullName</label>
+    <input type="text" class="form-control" formControlName="fullName" id="fullname">
+  </div>
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" formControlName="username" id="username">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" formControlName="password" id="password">
+  </div>
+  <div class="mb-3">
+    <label for="roles" class="form-label">Roles</label>
+    <select class="form-select" id="roles" formControlName="roleId">
+      <option value=0 disabled>Select a role</option>
+      <option *ngFor="let role of roles" value="{{role.id}}">{{role.name | titlecase}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="!currentUser.id" class="d-flex justify-content-between align-items-center">
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <a [routerLink]="['/login']">Do you have account?</a>
+  </div>
+
+  <button *ngIf="currentUser.id" type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,14 @@
+import { Injectable } from '@angular/core';
+import { BaseService } from './base.service';
+import { ISubject } from '../models/subject.model';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SubjectsService extends BaseService<ISubject> {
+
+  constructor(http: HttpClient) {
+    super(http, "subjectsStudents")
+   }
+}
