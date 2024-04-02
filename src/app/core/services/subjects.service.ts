@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
-import { ISubject } from '../models/subject.model';
+import { ISubject } from '../models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SubjectsService extends BaseService<ISubject> {
 
-  constructor(http: HttpClient) {
-    super(http, "subjectsStudents")
-   }
+  constructor(
+    http: HttpClient,
+  ) { 
+    super(http, "subjects")
+  }
 }

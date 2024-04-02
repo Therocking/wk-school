@@ -1,0 +1,21 @@
+<!-- <button *ngIf="currentUser.id" class="btn btn-outline-secondary mb-5" (click)="goBack()">Go back</button> -->
+
+<form (ngSubmit)="onSubmit()" [formGroup]="subjectForm" class="w-75">
+    <div class="mb-3">
+        <label for="teachers" class="form-label">Teachers</label>
+        <select class="form-select" id="teachers" formControlName="userId">
+            <option value=0 disabled>Select a teacher</option>
+            <option *ngFor="let teacher of teachers" value="{{teacher.id}}">{{teacher.fullName | titlecase}}</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="Subjects" class="form-label">Subjects</label>
+        <select class="form-select" id="subjects" formControlName="subjectId">
+            <option value=0 disabled>Select a subject</option>
+            <option *ngFor="let subs of subjects" value="{{subs.id}}">{{subs.name | titlecase}}</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

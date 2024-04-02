@@ -27,13 +27,7 @@ const routes: Routes = [
     path: "login",
     component: UsersLoginComponent,
     canActivate: [PublicGuard],
-  },
-  {
-    path: "edit/:id",
-    component: UsersFormComponent,
-    canActivate: [AuthGuard],
-    canMatch: [AuthGuard]
-  },
+  }, 
   {
     path: "**",
     redirectTo: "users"

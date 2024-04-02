@@ -18,7 +18,7 @@ export class PublicGuard implements CanActivate {
         return this.authService.checkAuthentication()
             .pipe(
                 tap(isAuth => {
-                    if (isAuth) this.router.navigateByUrl("/app")
+                    if (isAuth) this.router.navigateByUrl("/app/users")
                 }),
                 map(isAuth => !isAuth)
             )

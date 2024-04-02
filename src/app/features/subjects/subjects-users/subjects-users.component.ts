@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ISubjectUser } from 'src/app/core/models';
-import { SubjectsServiceUsers } from 'src/app/core/services';
+import { AuthService, SubjectsServiceUsers } from 'src/app/core/services';
 
 @Component({
-  selector: 'app-subjects-list',
-  templateUrl: './subjects-list.component.html',
-  styleUrls: ['./subjects-list.component.scss']
+  selector: 'app-subjects-users',
+  templateUrl: './subjects-users.component.html',
+  styleUrls: ['./subjects-users.component.scss']
 })
-export class SubjectsListComponent {
+export class SubjectsUsersComponent {
   public subjects: ISubjectUser[] = []
   private subjectStudent: SubjectsServiceUsers
   private subjectTeacher: SubjectsServiceUsers
@@ -17,22 +17,25 @@ export class SubjectsListComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private routerActivated: ActivatedRoute,
+    private authService: AuthService,
   ) {
-    this.subjectStudent = new SubjectsServiceUsers(http, "subjectsStudents"),
+    this.subjectStudent = new SubjectsServiceUsers(http, "subjectsStudents")
     this.subjectTeacher = new SubjectsServiceUsers(http, "subjectsTeachers")
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
     if (this.router.url.includes("/students")) {
-      this.subjectStudent.getAll()
+      this.subjectStudent.getAll("usersId=" + this.authService.userPermisions?.id)
         .subscribe(subjects => {
           this.subjects = subjects
         })
 
-        return
+      return
     }
-    
-    this.subjectTeacher.getAll()
+
+    this.subjectTeacher.getAll("usersId=" + this.authService.userPermisions?.id)
       .subscribe(subjects => {
         this.subjects = subjects
       })

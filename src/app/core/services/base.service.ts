@@ -16,8 +16,8 @@ export class BaseService<T extends IBase> {
     @Inject('endpoint') private endpoint: string
   ) {}
 
-  public getAll(): Observable<T[]> {
-    return this.http.get<T[]>(`${this.baseUrl}/${this.endpoint}?_limit=10&_sort=fullName`)
+  public getAll(params?: string): Observable<T[]> {
+    return this.http.get<T[]>(`${this.baseUrl}/${this.endpoint}?${params}`)
   }
 
   public getById(id: number): Observable<T | undefined> {
@@ -43,7 +43,7 @@ export class BaseService<T extends IBase> {
 
   public delete (id: number): Observable<T> {
     this.validId(id)
-    return this.http.delete<T>(`${this.baseUrl}/${this.endpoint}/${id}`)
+    return this.http.patch<T>(`${this.baseUrl}/${this.endpoint}/${id}`, {isActive: false})
   }
 
   private validId(id: number): void {

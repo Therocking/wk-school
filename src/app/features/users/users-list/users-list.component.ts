@@ -31,13 +31,18 @@ export class UsersListComponent {
 
   public deleteUser(id: number): void {
     this.userservice.delete(id)
-      .subscribe(() => {
-        this.users = this.users.filter(element => element.id !== id);
+      .subscribe(user => {
+        this.users = this.users.map(u => {
+          if(u.id === user.id) u = user
+
+          return u
+        })
       })
   }
 
   public isAdmin(): boolean {
-    return this.userPermisions!.permissions.includes("teacher.delete")
+    return this.userPermisions!.permissions.includes("teacher.delete") 
+           && this.userPermisions!.permissions.includes("student.delete")
   }
 
 }
