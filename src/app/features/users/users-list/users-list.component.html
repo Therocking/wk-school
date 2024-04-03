@@ -27,8 +27,14 @@
       <td>{{user.fullName}}</td>
       <td>{{user.username}}</td>
       <td>{{user.isActive ? "Active" : "Inactive"}}</td>
-      <td class="">
-        <button *ngIf="isAdmin()" (click)="deleteUser(user.id)" class="btn btn-outline-danger">Delete</button>
+      <td>
+        <button 
+          *ngIf="showDeleteBtn(user.isActive);" 
+          (click)="deleteUser(user.id)" 
+          class="btn btn-outline-danger"
+        >Delete</button>
+
+        <button *ngIf="!user.isActive" class="btn btn-primary">Activate</button>
         <a [routerLink]="['../users/edit', user.id]" class="btn btn-info mx-4">Edit</a>
       </td>
     </tr>

@@ -40,9 +40,10 @@ export class UsersListComponent {
       })
   }
 
-  public isAdmin(): boolean {
+  public showDeleteBtn(userActive: boolean): boolean {
     return this.userPermisions!.permissions.includes("teacher.delete") 
            && this.userPermisions!.permissions.includes("student.delete")
+           && userActive
   }
 
 }

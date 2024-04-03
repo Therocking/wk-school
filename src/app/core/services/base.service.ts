@@ -9,7 +9,7 @@ import { environments } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class BaseService<T extends IBase> {
-  private baseUrl: string = environments.baseUrl
+  protected baseUrl: string = environments.baseUrl
 
   constructor(
     private http: HttpClient,

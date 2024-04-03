@@ -4,7 +4,7 @@ import { Observable, of, tap } from 'rxjs';
 
 import { environments } from 'src/environments/environments';
 import { jwtDecode } from 'jwt-decode';
-import { IPermissions } from '../models';
+import { IPermissions, IRole } from '../models';
 
 interface IToken {
   token: string
@@ -39,12 +39,14 @@ export class AuthService {
       const tokeDecoded = jwtDecode<IPermissions>(token)
       this.permisions = tokeDecoded
 
-      console.log(this.permisions);
-      
       return of(true)
     } catch (error) {
       return of(false)
     }
+  }
+
+  public userRole(): Observable<string | undefined> {
+    return of(this.permisions?.role)
   }
 
   public logout(): void {

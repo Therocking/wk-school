@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { SubjectsListComponent } from "./subjects-list/subjects-list.component";
 import { SubjectsFormComponent } from "./subjects-form/subjects-form.component";
 import { SubjectsUsersComponent } from "./subjects-users/subjects-users.component";
+import { AdminGuard } from "src/app/core/guard/admin.guard";
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: "create",
-    component: SubjectsFormComponent
+    component: SubjectsFormComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: "students/my-subjects",

@@ -19,7 +19,7 @@ export class NavbarComponent {
     const currentUrl = this.router.url;
 
     // Verificar si la URL corresponde a las rutas donde quieres mostrar el Navbar
-    return !currentUrl.includes('/login') && !currentUrl.includes('/create');
+    return currentUrl.includes("/app")
   }
 
   public onLogout(): void {

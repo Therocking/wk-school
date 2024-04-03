@@ -40,7 +40,7 @@ export class UsersFormComponent {
         switchMap(({ id }) => this.userService.getById(id)),
       )
       .subscribe(hero => {
-        if (!hero) this.router.navigateByUrl('/')
+        if (!hero) this.router.navigateByUrl('/app')
 
         this.userForm.reset(hero)
       })
@@ -58,7 +58,7 @@ export class UsersFormComponent {
     if (this.currentUser.id) {
       this.userService.udpate(this.currentUser)
         .subscribe(() => {
-          this.router.navigateByUrl("/")
+          this.router.navigateByUrl("/app")
         })
 
       return
@@ -67,7 +67,7 @@ export class UsersFormComponent {
     this.currentUser.isActive = true
     this.userService.create(this.currentUser)
       .subscribe(hero => {
-        return this.router.navigateByUrl("/")
+        return this.router.navigateByUrl("/app")
       })
   }
 
